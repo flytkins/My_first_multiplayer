@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Godot Simple High Level Multiplayer"
-run/main_scene="uid://bo78tlkuiuirh"
+run/main_scene="uid://da77kdq5rw1ek"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 

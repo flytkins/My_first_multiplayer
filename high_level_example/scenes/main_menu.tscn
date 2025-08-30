@@ -1,0 +1,80 @@
+[gd_scene load_steps=6 format=3 uid="uid://da77kdq5rw1ek"]
+
+[ext_resource type="Script" uid="uid://dgihbbq0p0i46" path="res://high_level_example/scripts/main_menu.gd" id="1_7pvcw"]
+[ext_resource type="Texture2D" uid="uid://cu3objhdqvxur" path="res://textures/neoclassical-medieval-portrait-knight-illustration.jpg" id="1_dd5ok"]
+[ext_resource type="AudioStream" uid="uid://botov4sqisocd" path="res://sound/Let down - Radiohead (Piano Cover) cut.wav" id="3_grtjd"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7pvcw"]
+texture = ExtResource("1_dd5ok")
+modulate_color = Color(0.712129, 0.712129, 0.712129, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_grtjd"]
+bg_color = Color(0.139032, 0.152779, 0.171389, 1)
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7pvcw")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_7pvcw")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -64.0
+offset_right = 237.0
+offset_bottom = 146.0
+grow_vertical = 2
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+placeholder_text = "Путеводная нить"
+
+[node name="Button_join" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 29
+theme_override_styles/normal = SubResource("StyleBoxFlat_grtjd")
+text = "Сопроводить"
+
+[node name="Button_host" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 29
+theme_override_styles/normal = SubResource("StyleBoxFlat_grtjd")
+text = "В путь"
+
+[node name="Button_exit" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 29
+theme_override_styles/normal = SubResource("StyleBoxFlat_grtjd")
+text = "Спать"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Нормально - бороться за того, кто тебя любит; пустая трата времени - бороться за то, чтобы тебя полюбили"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_grtjd")
+volume_db = -25.0
+autoplay = true
+
+[connection signal="pressed" from="VBoxContainer/Button_join" to="." method="_on_button_join_pressed"]
+[connection signal="pressed" from="VBoxContainer/Button_host" to="." method="_on_button_host_pressed"]
+[connection signal="pressed" from="VBoxContainer/Button_exit" to="." method="_on_button_exit_pressed"]

@@ -16,7 +16,8 @@ func start_server() -> void:
 		return
 		
 	multiplayer.multiplayer_peer = peer #отдаем наш объект в руки годо в виде его свойства
-	
+	await get_tree().process_frame  # Ждем один кадр для инициализации
+	spawn_server_player()
 
 
 func start_client(ip_address: String) -> void:
@@ -34,5 +35,14 @@ func start_client(ip_address: String) -> void:
 		return
 		
 	multiplayer.multiplayer_peer = peer
+	
+	
+func spawn_server_player():
+	# Получаем спавнер и спавним серверного игрока
+	var spawner = get_tree().get_first_node_in_group("spawner")
+	if spawner:
+		spawner.spawn_player(1)  # 1 = ID сервера
+	else:
+		print("Ошибка: не найден спавнер!")
 	
 	

@@ -3,9 +3,14 @@ extends MultiplayerSpawner
 @export var network_player: PackedScene # ← Ссылка на сцену игрока
 
 func _ready() -> void:
+	add_to_group("spawner")
 	multiplayer.peer_connected.connect(spawn_player) # ← ПОДПИСКА НА СОБЫТИЕ
 #"Когда кто-то подключается к серверу, вызывай функцию spawn_player"
 #Godot автоматически вызовет spawn_player с ID подключившегося игрока
+	# Если мы сервер - спавним себя сразу
+	if multiplayer.is_server():
+		await get_tree().process_frame  # Ждем инициализации
+		spawn_player(1)  # Спавним серверного игрока
 
 func spawn_player(id: int) -> void:
 	if not multiplayer.is_server(): return # чтобы клиент не спавнил игроков
